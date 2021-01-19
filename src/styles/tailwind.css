@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+
+.input {
+  @apply bg-gray-100 shadow-inner py-3 px-5 rounded-lg transition-colors;
+}
+
+.input:focus {
+  @apply ring-2 ring-green-600 ring-opacity-90 outline-none;
+}
+
+.btn {
+  @apply py-3 px-5 bg-lime-500 text-white text-xl rounded-lg transition-colors;
+}
+
+.btn:focus {
+
+  @apply outline-none;
+}
+
+.btn:hover {
+  @apply bg-lime-600;
+}
+
+
+@tailwind utilities;
