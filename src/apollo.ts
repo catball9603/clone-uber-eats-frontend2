@@ -1,10 +1,28 @@
-import { ApolloClient, InMemoryCache, makeVar } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, makeVar } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { LOCALSTORAGE_TOKEN } from './constans';
 
+const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
 //typePolicies update(local state)_reactive Variable
-export const isLoggedInVar = makeVar(false);
+export const isLoggedInVar = makeVar(Boolean(token));
+// export const isLoggedInVar = makeVar(Boolean(token));
+export const authTokenVar = makeVar(token);
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'x-jwt': authTokenVar() || "",
+    },
+  };
+});
 
 export const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -12,6 +30,11 @@ export const client = new ApolloClient({
           isLoggedIn: {
             read() {
               return isLoggedInVar();
+            },
+          },
+          token: {
+            read() {
+              return authTokenVar();
             },
           },
         },

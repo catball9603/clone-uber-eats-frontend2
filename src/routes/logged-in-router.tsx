@@ -1,19 +1,30 @@
 import React from 'react';
-import { isLoggedInVar } from '../apollo';
+import Restaruants from '../pages/client/Restaruants';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import Header from '../components/Header';
+import { UseMe } from '../hooks/useMe';
 
-type IProps = {};
+const ClientRoutes = [<Route key={1} path="/" exact component={Restaruants} />];
 
-const LoggedInRouter: React.FC<IProps> = () => {
-  const onClick = () => {
-    isLoggedInVar(false);
-  };
+const LoggedInRouter = () => {
+  const { data, loading, error } = UseMe();
+
+  if (!data || loading || error) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <span className="font-semibold text-xl tracking-wide">Loading...</span>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <h1>logged-in-router</h1>
-      <button className="bg-red-200" onClick={onClick}>
-        Click in Logout
-      </button>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        {data.me.role === 'Client' && ClientRoutes}
+        <Redirect from="*" to="/" />
+      </Switch>
+    </Router>
   );
 };
 

@@ -1,14 +1,19 @@
+/* eslint-disable no-useless-escape */
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import FormError from '../components/form-error';
-import { ApolloError, gql, useMutation } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import uberLogo from '../images/eats-logo-1a01872c77.svg';
-import { Button } from '../components/button';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
+import { FormError } from '../components/form-error';
+import { Button } from '../components/button';
+import { LoginMutation, LoginMutationVariables } from '../__generated__/LoginMutation';
+import { authTokenVar, isLoggedInVar } from '../apollo';
+import { LOCALSTORAGE_TOKEN } from '../constans';
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(input: { email: $email, password: $password }) {
+  mutation LoginMutation($loginInput: LoginInput!) {
+    login(input: $loginInput) {
       ok
       token
       error
@@ -26,26 +31,33 @@ const Login = () => {
     mode: 'onChange',
   });
 
-  const [LoginMutation, { data: loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: (data: any) => {
-      const { error, ok, token } = data;
-      if (ok) {
-        console.log(token);
-      } else {
-        console.log(error);
-      }
+  const onCompleted = (data: LoginMutation) => {
+    const {
+      login: { ok, token },
+    } = data;
+    if (ok && token) {
+      localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+      authTokenVar(token);
+      isLoggedInVar(true);
+    }
+  };
+
+  const [LoginMutation, { data: loginMutationResult, loading }] = useMutation<LoginMutation, LoginMutationVariables>(
+    LOGIN_MUTATION,
+    {
+      onCompleted,
     },
-    onError: (error: ApolloError) => {
-      console.log(error);
-    },
-  });
+  );
+
   const onSubmit = () => {
     if (!loading) {
       const { email, password } = getValues();
       LoginMutation({
         variables: {
-          email,
-          password,
+          loginInput: {
+            email,
+            password,
+          },
         },
       });
     }
@@ -53,19 +65,26 @@ const Login = () => {
 
   return (
     <div className="h-screen flex items-center flex-col mt-10 lg:mt-28 ">
+      <Helmet>
+        <title>Login | Uber Eats</title>
+      </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col items-center px-5 ">
-        <img src={uberLogo} alt="Logo" className="w-48 lg:w-60 mb-10" />
-        <h1 className="w-full font-semibold text-left text-3xl lg:text-4xl mb-5">Welcom back</h1>
+        <img src={uberLogo} alt="Logo" className=" w-48 mb-12 lg:w-60" />
+        <h1 className="w-full font-semibold text-left text-2xl lg:text-3xl mb-5">Welcom back</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 my-5 w-full">
           <input
-            ref={register({ required: 'Email is required' })}
+            ref={register({
+              required: 'Email is required',
+              pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            })}
             name="email"
             type="email"
             required
             placeholder="Email"
             className="input"
           />
-          {errors.email?.message && <FormError errorMessage={errors.email.message} />}
+          {errors.email?.message && <FormError errorMessage={errors.email?.message} />}
+          {errors.email?.type === 'pattern' && <FormError errorMessage={'Please enter a valid email'} />}
           <input
             ref={register({ required: 'Password is required' })}
             name="password"
@@ -74,9 +93,10 @@ const Login = () => {
             placeholder="Password"
             className="input"
           />
-          {errors.password?.message && <FormError errorMessage={errors.password.message} />}
+          {errors.password?.message && <FormError errorMessage={errors.password?.message} />}
           {errors.password?.type === 'minLength' && <FormError errorMessage={'Password must be more than 10 chars.'} />}
           <Button canClick={formState.isValid} actionText={'Next'} loading={loading} />
+          {loginMutationResult?.login.error && <FormError errorMessage={loginMutationResult.login.error} />}
         </form>
         <div>
           New to Uber?{' '}
