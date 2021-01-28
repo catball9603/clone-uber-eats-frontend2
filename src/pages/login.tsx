@@ -5,7 +5,7 @@ import { gql, useMutation } from '@apollo/client';
 import uberLogo from '../images/eats-logo-1a01872c77.svg';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { FormError } from '../components/form-error';
+import { FormError } from '../components/FormError';
 import { Button } from '../components/button';
 import { LoginMutation, LoginMutationVariables } from '../__generated__/LoginMutation';
 import { authTokenVar, isLoggedInVar } from '../apollo';

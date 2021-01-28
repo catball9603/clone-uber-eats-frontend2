@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/viewer.html?init=true -->
+<html ng-app="viewerApp" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+  <title>사전</title>
+  
+  
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" href="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/css/common.css">
+  <link rel="stylesheet" href="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/css/viewer.css">
+</head>
+<body class="viewer">
+<div class="wrap ng-scope" ng-controller="mainCtrl" style="font-size: 100%;">
+  <!-- ngIf: query --><div class="content ng-scope" ng-if="query">
+    <!-- ngRepeat: word in result --><!-- ngIf: result.length --><div ng-repeat="word in result" ng-if="result.length" class="ng-scope">
+      <!-- ngIf: $index -->
+      <h3>
+        <strong><a href="http://endic.naver.com/enkrEntry.nhn?entryId=b6c652f800a64e1c948cd56b064eaf2b" class="_title title ng-binding" target="_blank" data-analytics-event="viewer:goToOriginPage">chicken</a></strong>
+        <sup class="number ng-binding"></sup>
+        <span class="phonetic-symbol ng-binding">[ˈtʃɪkɪn]</span>
+        <!-- ngIf: word.pronunciation --><button class="_audioBtn fui-volume audio-btn ng-scope" ng-class="{on:isPlayingAudio}" ng-if="word.pronunciation" ng-click="playAudio(word.pronunciation)" data-analytics-event="viewer:playAudio:0"></button><!-- end ngIf: word.pronunciation -->
+      </h3>
+      <!-- ngRepeat: meaning in word.meanings --><div class="meaning ng-scope" ng-repeat="meaning in word.meanings">
+        <h4 class="type ng-binding">명사</h4>
+        <!-- ngRepeat: definition in meaning.definitions --><div class="defs ng-scope" ng-repeat="definition in meaning.definitions">
+          <div class="ng-binding">1. 닭cock, hen</div>
+          <div class="ex-en ng-binding">They keep chickens in the back yard.</div>
+          <div class="ex-kr ng-binding">그들은 뒷마당에 닭을 기른다.</div>
+        </div><!-- end ngRepeat: definition in meaning.definitions -->
+        <!-- ngIf: meaning.moreDefinition.cout -->
+      </div><!-- end ngRepeat: meaning in word.meanings -->
+      <div class="toggle">
+        <button class="_toggleBtn toggle-btn fui-checkbox-unchecked" ng-class="{&#39;on&#39;: isEE, &#39;fui-checkbox-checked&#39;: isEE, &#39;fui-checkbox-unchecked&#39;: !isEE}" ng-click="toggleDicType()" data-analytics-event="viewer:toggleDicType:true">영영사전</button>
+      </div>
+      <button class="_closeBtn close-btn" ng-click="closeViewer()" data-analytics-event="viewer:closeBtn">닫기</button>
+    </div><!-- end ngIf: result.length --><!-- end ngRepeat: word in result --><!-- ngIf: result.length --><div ng-repeat="word in result" ng-if="result.length" class="ng-scope">
+      <!-- ngIf: $index --><hr class="line ng-scope" ng-if="$index"><!-- end ngIf: $index -->
+      <h3>
+        <strong><a href="http://endic.naver.com/enkrEntry.nhn?entryId=96b066d8ba8d435988342af58743e472" class="_title title ng-binding" target="_blank" data-analytics-event="viewer:goToOriginPage">Chicken</a></strong>
+        <sup class="number ng-binding"></sup>
+        <span class="phonetic-symbol ng-binding"></span>
+        <!-- ngIf: word.pronunciation -->
+      </h3>
+      <!-- ngRepeat: meaning in word.meanings --><div class="meaning ng-scope" ng-repeat="meaning in word.meanings">
+        <h4 class="type ng-binding"></h4>
+        <!-- ngRepeat: definition in meaning.definitions --><div class="defs ng-scope" ng-repeat="definition in meaning.definitions">
+          <div class="ng-binding">1. [조리용어]치킨</div>
+          <div class="ex-en ng-binding"></div>
+          <div class="ex-kr ng-binding"></div>
+        </div><!-- end ngRepeat: definition in meaning.definitions -->
+        <!-- ngIf: meaning.moreDefinition.cout -->
+      </div><!-- end ngRepeat: meaning in word.meanings -->
+      <div class="toggle">
+        <button class="_toggleBtn toggle-btn fui-checkbox-unchecked" ng-class="{&#39;on&#39;: isEE, &#39;fui-checkbox-checked&#39;: isEE, &#39;fui-checkbox-unchecked&#39;: !isEE}" ng-click="toggleDicType()" data-analytics-event="viewer:toggleDicType:true">영영사전</button>
+      </div>
+      <button class="_closeBtn close-btn" ng-click="closeViewer()" data-analytics-event="viewer:closeBtn">닫기</button>
+    </div><!-- end ngIf: result.length --><!-- end ngRepeat: word in result -->
+    <!-- ngIf: !result.length -->
+  </div><!-- end ngIf: query -->
+</div>
+
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/vendor/jquery.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/vendor/underscore.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/vendor/angular.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/vendor/q.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/define.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/constant.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/message.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/storage.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/options.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/f.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/common/analytics.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/content/basicWords.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/content/viewer.js"></script>
+<script src="chrome-extension://jfibpeiddefellcfgnijpcpddoimbdij/js/content/actionWatcher.js"></script>
+
+</body></html>
