@@ -6,7 +6,6 @@ import { Link, useHistory } from 'react-router-dom';
 import uberLogo from '../images/eats-logo-1a01872c77.svg';
 import { FormError } from '../components/FormError';
 import { Button } from '../components/button';
-
 import { UserRole } from '../__generated__/globalTypes';
 import { CreateAccountMutation, CreateAccountMutationVariables } from '../__generated__/CreateAccountMutation';
 
