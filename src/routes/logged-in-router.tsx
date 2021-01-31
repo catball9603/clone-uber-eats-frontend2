@@ -1,15 +1,20 @@
 import React from 'react';
 import Restaruants from '../pages/Client/Restaurants';
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Header from '../components/Header';
 import { UseMe } from '../hooks/useMe';
 import { ConfirmEmail } from '../pages/User/ConfirmEmail';
 import EditProfile from '../pages/User/EditProfile';
+import NotFound404 from '../components/NotFound404';
+import Search from '../pages/Client/Search';
+import Category from '../pages/Client/Category';
 
 const ClientRoutes = [
   <Route key={1} path="/" exact component={Restaruants} />,
-  <Route key={2} path="/confirm" exact component={ConfirmEmail} />,
-  <Route key={3} path="/edit-profile" exact component={EditProfile} />,
+  <Route key={2} path="/confirm" component={ConfirmEmail} />,
+  <Route key={3} path="/edit-profile" component={EditProfile} />,
+  <Route key={4} path="/search" component={Search} />,
+  <Route key={5} path="/category/:slug" component={Category} />,
 ];
 
 const LoggedInRouter = () => {
@@ -30,7 +35,7 @@ const LoggedInRouter = () => {
         {data.me.role === 'Client' && ClientRoutes}
         {/* <Redirect from="*" to="/" /> */}
 
-        <Redirect to="/" />
+        <Route component={NotFound404} />
       </Switch>
     </Router>
   );
