@@ -10,6 +10,7 @@
 export interface RestaurantParts_category {
   __typename: "Category";
   name: string;
+  slug: string;
 }
 
 export interface RestaurantParts {

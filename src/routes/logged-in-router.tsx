@@ -2,12 +2,13 @@ import React from 'react';
 import Restaruants from '../pages/Client/Restaurants';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Header from '../components/Header';
+import NotFound404 from '../components/NotFound404';
 import { UseMe } from '../hooks/useMe';
 import { ConfirmEmail } from '../pages/User/ConfirmEmail';
 import EditProfile from '../pages/User/EditProfile';
-import NotFound404 from '../components/NotFound404';
 import Search from '../pages/Client/Search';
 import Category from '../pages/Client/Category';
+import Restaurant from '../pages/Client/RstaurantDetail';
 
 const ClientRoutes = [
   <Route key={1} path="/" exact component={Restaruants} />,
@@ -15,6 +16,7 @@ const ClientRoutes = [
   <Route key={3} path="/edit-profile" component={EditProfile} />,
   <Route key={4} path="/search" component={Search} />,
   <Route key={5} path="/category/:slug" component={Category} />,
+  <Route key={6} path="/restaurant/:id" component={Restaurant} />,
 ];
 
 const LoggedInRouter = () => {

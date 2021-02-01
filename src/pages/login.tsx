@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { FormError } from '../components/FormError';
 import { Button } from '../components/button';
-import { LoginMutation, LoginMutationVariables } from '../__generated__/LoginMutation';
+import { loginMutation, loginMutationVariables } from '../__generated__/loginMutation';
 import { authTokenVar, isLoggedInVar } from '../apollo';
 import { LOCALSTORAGE_TOKEN } from '../constans';
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($loginInput: LoginInput!) {
+  mutation loginMutation($loginInput: LoginInput!) {
     login(input: $loginInput) {
       ok
-      token
       error
+      token
     }
   }
 `;
@@ -31,7 +31,7 @@ const Login = () => {
     mode: 'onChange',
   });
 
-  const onCompleted = (data: LoginMutation) => {
+  const onCompleted = (data: loginMutation) => {
     const {
       login: { ok, token },
     } = data;
@@ -42,11 +42,9 @@ const Login = () => {
     }
   };
 
-  const [LoginMutation, { data: loginMutationResult, loading }] = useMutation<LoginMutation, LoginMutationVariables>(
+  const [LoginMutation, { data: loginMutationResult, loading }] = useMutation<loginMutation, loginMutationVariables>(
     LOGIN_MUTATION,
-    {
-      onCompleted,
-    },
+    { onCompleted },
   );
 
   const onSubmit = () => {

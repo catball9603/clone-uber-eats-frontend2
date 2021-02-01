@@ -12,6 +12,7 @@ import { CategoryInput } from "./globalTypes";
 export interface category_category_restaurants_category {
   __typename: "Category";
   name: string;
+  slug: string;
 }
 
 export interface category_category_restaurants {
