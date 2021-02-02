@@ -78,17 +78,18 @@ const Login = () => {
             name="email"
             type="email"
             required
-            placeholder="Email"
+            placeholder="email"
             className="input"
           />
           {errors.email?.message && <FormError errorMessage={errors.email?.message} />}
           {errors.email?.type === 'pattern' && <FormError errorMessage={'Please enter a valid email'} />}
           <input
+            role="alert"
             ref={register({ required: 'Password is required' })}
             name="password"
             type="password"
             required
-            placeholder="Password"
+            placeholder="password"
             className="input"
           />
           {errors.password?.message && <FormError errorMessage={errors.password?.message} />}

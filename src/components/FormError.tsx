@@ -5,5 +5,9 @@ interface IProps {
 }
 
 export const FormError: React.FC<IProps> = ({ errorMessage }) => {
-  return <span className="text-sm text-red-500">{errorMessage}</span>;
+  return (
+    <span role="alert" className="text-sm text-red-500">
+      {errorMessage}
+    </span>
+  );
 };

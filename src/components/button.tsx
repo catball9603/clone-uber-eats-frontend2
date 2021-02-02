@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react';
 
 interface IButtonProps {
@@ -7,7 +8,10 @@ interface IButtonProps {
 }
 
 export const Button: React.FC<IButtonProps> = ({ canClick, loading, actionText }) => (
-  <button className={`btn ${canClick ? 'bg-lime-500 hover:bg-lime-600' : 'bg-gray-300 pointer-events-none'}`}>
+  <button
+    role="button"
+    className={`btn ${canClick ? 'bg-lime-500 hover:bg-lime-600' : 'bg-gray-300 pointer-events-none'}`}
+  >
     {loading ? 'Loading...' : actionText}
   </button>
 );
