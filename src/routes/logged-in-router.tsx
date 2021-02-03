@@ -9,14 +9,53 @@ import EditProfile from '../pages/User/EditProfile';
 import Search from '../pages/Client/Search';
 import Category from '../pages/Client/Category';
 import Restaurant from '../pages/Client/RstaurantDetail';
+import MyRestaurants from '../pages/Owner/MyRestaurants';
+import AddRestaurant from '../pages/Owner/AddRestaurant';
 
-const ClientRoutes = [
-  <Route key={1} path="/" exact component={Restaruants} />,
-  <Route key={2} path="/confirm" component={ConfirmEmail} />,
-  <Route key={3} path="/edit-profile" component={EditProfile} />,
-  <Route key={4} path="/search" component={Search} />,
-  <Route key={5} path="/category/:slug" component={Category} />,
-  <Route key={6} path="/restaurant/:id" component={Restaurant} />,
+const clientRoutes = [
+  {
+    path: '/',
+    component: <Restaruants />,
+  },
+  {
+    path: '/confirm',
+    component: <ConfirmEmail />,
+  },
+  {
+    path: '/edit-profile',
+    component: <EditProfile />,
+  },
+  {
+    path: '/search',
+    component: <Search />,
+  },
+  {
+    path: '/category/:slug',
+    component: <Category />,
+  },
+  {
+    path: '/restaurant/:id',
+    component: <Restaurant />,
+  },
+];
+
+const commonRoutes = [
+  {
+    path: '/confirm',
+    component: <ConfirmEmail />,
+  },
+  {
+    path: '/edit-profile',
+    component: <EditProfile />,
+  },
+];
+
+const restaurantRoutes = [
+  {
+    path: '/',
+    component: <MyRestaurants />,
+  },
+  { path: '/add-restaurant', component: <AddRestaurant /> },
 ];
 
 const LoggedInRouter = () => {
@@ -34,9 +73,23 @@ const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {data.me.role === 'Client' && ClientRoutes}
-        {/* <Redirect from="*" to="/" /> */}
-
+        {data.me.role === 'Client' &&
+          clientRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+        {data.me.role === 'Owner' &&
+          restaurantRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+        {commonRoutes.map((route) => (
+          <Route exact key={route.path} path={route.path}>
+            {route.component}
+          </Route>
+        ))}
         <Route component={NotFound404} />
       </Switch>
     </Router>

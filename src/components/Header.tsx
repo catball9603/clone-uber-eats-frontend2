@@ -7,7 +7,7 @@ import { UseMe } from '../hooks/useMe';
 
 const Header: React.FC = () => {
   const { data } = UseMe();
-  console.log(data);
+
   return (
     <>
       {!data?.me.verified && (

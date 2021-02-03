@@ -22,6 +22,17 @@
   @apply bg-lime-600;
 }
 
+.container {
+  @apply max-w-screen-2xl mx-auto;
+}
+
+.link {
+  @apply text-lime-500;
+}
+
+.link:hover {
+  @apply underline;
+}
 
 
 
