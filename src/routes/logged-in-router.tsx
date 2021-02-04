@@ -8,9 +8,11 @@ import { ConfirmEmail } from '../pages/User/ConfirmEmail';
 import EditProfile from '../pages/User/EditProfile';
 import Search from '../pages/Client/Search';
 import Category from '../pages/Client/Category';
-import Restaurant from '../pages/Client/RstaurantDetail';
+import RstaurantDetail from '../pages/Client/RstaurantDetail';
 import MyRestaurants from '../pages/Owner/MyRestaurants';
 import AddRestaurant from '../pages/Owner/AddRestaurant';
+import MyRestaurant from '../pages/Owner/MyRestaurant';
+import AddDish from '../pages/Owner/AddDish';
 
 const clientRoutes = [
   {
@@ -34,8 +36,8 @@ const clientRoutes = [
     component: <Category />,
   },
   {
-    path: '/restaurant/:id',
-    component: <Restaurant />,
+    path: '/restaurants/:id',
+    component: <RstaurantDetail />,
   },
 ];
 
@@ -56,6 +58,8 @@ const restaurantRoutes = [
     component: <MyRestaurants />,
   },
   { path: '/add-restaurant', component: <AddRestaurant /> },
+  { path: '/restaurants/:id', component: <MyRestaurant /> },
+  { path: '/restaurants/:restaurantId/add-dish', component: <AddDish /> },
 ];
 
 const LoggedInRouter = () => {

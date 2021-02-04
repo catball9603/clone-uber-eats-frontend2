@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { gql, useMutation } from '@apollo/client';
+import { gql, useApolloClient, useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/button';
 import { FormError } from '../../components/FormError';
 import { createRestaurant, createRestaurantVariables } from '../../__generated__/createRestaurant';
+import { MY_RESTAURANTS_QUERY } from './MyRestaurants';
 
 const CREATE_RESTAURANT_MUTATION = gql`
   mutation createRestaurant($input: CreateRestaurantInput!) {
     createRestaurant(input: $input) {
       ok
       error
+      restaurantId
     }
   }
 `;
@@ -25,17 +28,46 @@ interface IFormProps {
 
 const AddRestaurant = () => {
   const [uploading, setUploading] = useState(false);
+  const client = useApolloClient();
+  const history = useHistory();
+  const [imgUrl, setImgUrl] = useState('');
   const onCompleted = (data: createRestaurant) => {
     const {
-      createRestaurant: { ok, error },
+      createRestaurant: { ok, restaurantId },
     } = data;
     if (ok) {
+      const { file, name, address, categoryName } = getValues();
       setUploading(false);
+      const queryResult = client.readQuery({ query: MY_RESTAURANTS_QUERY });
+      client.writeQuery({
+        query: MY_RESTAURANTS_QUERY,
+        data: {
+          myRestaurants: {
+            ...queryResult.myRestaurants,
+            restaurants: [
+              {
+                address,
+                category: {
+                  name: categoryName,
+                  __typename: 'Category',
+                },
+                coverImg: imgUrl,
+                id: restaurantId,
+                isPromoted: false,
+                name,
+                __typename: 'Restaurant',
+              },
+              ...queryResult.myRestaurants.restaurants,
+            ],
+          },
+        },
+      });
+      history.push('/');
     }
   };
   const [createRestaurantMutation, { data }] = useMutation<createRestaurant, createRestaurantVariables>(
     CREATE_RESTAURANT_MUTATION,
-    { onCompleted },
+    { onCompleted, refetchQueries: [{ query: MY_RESTAURANTS_QUERY }] },
   );
   const { register, getValues, handleSubmit, errors, formState } = useForm<IFormProps>({
     mode: 'onChange',
