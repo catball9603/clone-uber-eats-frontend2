@@ -29,6 +29,7 @@ export const DISH_FRAGMENT = gql`
     id
     name
     photo
+    price
     description
     options {
       name
@@ -38,5 +39,13 @@ export const DISH_FRAGMENT = gql`
         extra
       }
     }
+  }
+`;
+
+export const ORDERS_FRAGMENT = gql`
+  fragment OrderParts on Order {
+    id
+    createdAt
+    total
   }
 `;
