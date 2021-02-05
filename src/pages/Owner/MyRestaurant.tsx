@@ -10,10 +10,8 @@ import { myRestaurant, myRestaurantVariables } from '../../__generated__/myResta
 import {
   VictoryAxis,
   VictoryChart,
-  VictoryContainer,
   VictoryLabel,
   VictoryLine,
-  VictoryPie,
   VictoryTheme,
   VictoryTooltip,
   VictoryVoronoiContainer,
@@ -53,21 +51,11 @@ const MyRestaurant = () => {
       },
     },
   });
-  console.log(data);
-  const chartData = [
-    { x: 1, y: 3000 },
-    { x: 2, y: 1500 },
-    { x: 3, y: 4250 },
-    { x: 4, y: 3050 },
-    { x: 5, y: 2300 },
-    { x: 6, y: 7150 },
-    { x: 7, y: 6830 },
-  ];
 
   return (
     <div>
       <Helmet>
-        <title>My Restaurant | Uber Eats</title>``
+        <title>My Restaurant | Uber Eats</title>
       </Helmet>
       <div
         className="bg-gray-800 py-44 bg-center bg-cover mb-10"
