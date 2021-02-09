@@ -37,6 +37,7 @@ const Dish: React.FC<IDishProps> = ({
       }
     }
   };
+
   return (
     <div
       className={`px-8 py-4 border-2 hover:border-gray-800 transition-all ${

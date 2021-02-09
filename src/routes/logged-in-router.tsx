@@ -13,6 +13,9 @@ import MyRestaurants from '../pages/Owner/MyRestaurants';
 import AddRestaurant from '../pages/Owner/AddRestaurant';
 import MyRestaurant from '../pages/Owner/MyRestaurant';
 import AddDish from '../pages/Owner/AddDish';
+import Order from '../pages/User/Order';
+import DashBoard from '../pages/Driver/DashBoard';
+import { UserRole } from '../__generated__/globalTypes';
 
 const clientRoutes = [
   {
@@ -50,6 +53,10 @@ const commonRoutes = [
     path: '/edit-profile',
     component: <EditProfile />,
   },
+  {
+    path: '/orders/:id',
+    component: <Order />,
+  },
 ];
 
 const restaurantRoutes = [
@@ -61,6 +68,8 @@ const restaurantRoutes = [
   { path: '/restaurants/:id', component: <MyRestaurant /> },
   { path: '/restaurants/:restaurantId/add-dish', component: <AddDish /> },
 ];
+
+const driverRoutes = [{ path: '/', component: <DashBoard /> }];
 
 const LoggedInRouter = () => {
   const { data, loading, error } = UseMe();
@@ -77,14 +86,20 @@ const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {data.me.role === 'Client' &&
+        {data.me.role === UserRole.Client &&
           clientRoutes.map((route) => (
             <Route exact key={route.path} path={route.path}>
               {route.component}
             </Route>
           ))}
-        {data.me.role === 'Owner' &&
+        {data.me.role === UserRole.Owner &&
           restaurantRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+        {data.me.role === UserRole.Delivery &&
+          driverRoutes.map((route) => (
             <Route exact key={route.path} path={route.path}>
               {route.component}
             </Route>

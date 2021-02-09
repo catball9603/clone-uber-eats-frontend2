@@ -1,5 +1,4 @@
 import { gql, useMutation } from '@apollo/client';
-import { curry } from 'cypress/types/lodash';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
