@@ -113,7 +113,7 @@ const Order = () => {
             <span className="font-medium">{data?.getOrder.order?.driver?.email || 'Not yet.'}</span>
           </div>
           {userData?.me.role === 'Client' && (
-            <span className="text-center mt-5 mb-3 text-2xl text-lime-600">Status: {data?.getOrder.order?.status}</span>
+            <span className="text-center mt-5 text-2xl text-lime-600">Status: {data?.getOrder.order?.status}</span>
           )}
           {userData?.me.role === UserRole.Owner && (
             <>
@@ -129,11 +129,34 @@ const Order = () => {
               )}
               {data?.getOrder.order?.status !== OrderStatus.Cooking &&
                 data?.getOrder.order?.status !== OrderStatus.Pending && (
-                  <span className="text-center mt-5 mb-3 text-2xl text-lime-600">
+                  <span className="text-center mt-5 text-2xl text-lime-600">
                     Status: {data?.getOrder.order?.status}
                   </span>
                 )}
             </>
+          )}
+          {userData?.me.role === UserRole.Delivery && (
+            <>
+              {data?.getOrder.order?.status === OrderStatus.Cooked && (
+                <button onClick={() => onButtonClick(OrderStatus.PickedUp)} className="btn">
+                  PickedUp
+                </button>
+              )}
+              {data?.getOrder.order?.status === OrderStatus.PickedUp && (
+                <button onClick={() => onButtonClick(OrderStatus.Delivered)} className="btn mb-3">
+                  Delivered
+                </button>
+              )}
+              {/* {data?.getOrder.order?.status !== OrderStatus.Cooked &&
+                data?.getOrder.order?.status !== OrderStatus.PickedUp && (
+                  <span className="text-center mt-5 text-2xl text-lime-600">
+                    Status: {data?.getOrder.order?.status}
+                  </span>
+                )} */}
+            </>
+          )}
+          {data?.getOrder.order?.status === OrderStatus.Delivered && (
+            <span className=" text-center mt-1 mb-5 text-xl text-lime-600">Thank you for using Nuber Eats.</span>
           )}
         </div>
       </div>

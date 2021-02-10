@@ -10,7 +10,7 @@
 }
 
 .btn {
-  @apply py-3 px-5 bg-lime-500 text-white text-xl rounded-lg transition-colors;
+  @apply py-3 px-5 bg-lime-500 text-white text-xl transition-colors;
 }
 
 .btn:focus {

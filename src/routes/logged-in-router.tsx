@@ -14,7 +14,7 @@ import AddRestaurant from '../pages/Owner/AddRestaurant';
 import MyRestaurant from '../pages/Owner/MyRestaurant';
 import AddDish from '../pages/Owner/AddDish';
 import Order from '../pages/User/Order';
-import DashBoard from '../pages/Driver/DashBoard';
+import DashBoard from '../pages/Driver/DriverBoard';
 import { UserRole } from '../__generated__/globalTypes';
 
 const clientRoutes = [
