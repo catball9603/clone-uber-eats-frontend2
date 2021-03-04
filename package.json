@@ -36,9 +36,11 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "tailwind:prodbuild": "cross-env NODE_ENV=production npm run tailwind:build",
     "tailwind:build": "tailwind build ./src/styles/tailwind.css -o ./src/styles/styles.css",
     "start": "npm run apollo:codegen & npm run tailwind:build & react-scripts start",
     "apollo:codegen": "rimraf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
+    "prebuild": "CI=false npm run tailwind:prodbuild",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll=false",
@@ -65,7 +67,8 @@
   "devDependencies": {
     "@testing-library/cypress": "^7.0.3",
     "@types/googlemaps": "^3.43.2",
-    "@types/react-helmet": "^6.1.0"
+    "@types/react-helmet": "^6.1.0",
+    "cross-env": "^7.0.3"
   },
   "jest": {
     "collectCoverageFrom": [
