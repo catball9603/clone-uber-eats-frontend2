@@ -128,7 +128,7 @@ const RestaurantDetail = () => {
   const history = useHistory();
   const onCompleted = (data: createOrder) => {
     const {
-      createOrder: { ok, orderId },
+      createOrder: { orderId },
     } = data;
     if (data.createOrder.ok) {
       history.push(`/orders/${orderId}`);
