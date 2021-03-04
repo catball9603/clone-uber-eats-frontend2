@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { FormError } from '../components/FormError';
 import { Button } from '../components/button';
-import { loginMutation, loginMutationVariables } from '../__generated__/loginMutation';
+
 import { authTokenVar, isLoggedInVar } from '../apollo';
 import { LOCALSTORAGE_TOKEN } from '../constans';
+import { loginMutation, loginMutationVariables } from '../__generated__/loginMutation';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
