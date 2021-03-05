@@ -74,7 +74,7 @@
     "collectCoverageFrom": [
       "./src/components/**/*.tsx",
       "./src/pages/**/*.tsx",
-      "./src/routes/**/*.tsxq"
+      "./src/routes/**/*.tsx"
     ]
   }
 }
