@@ -31,7 +31,7 @@ const AddDish = () => {
   const history = useHistory();
   const { restaurantId } = useParams<IParams>();
   const onCompleted = () => {};
-  const [createDishMutation, { loading, data }] = useMutation<createDish, createDishVariables>(CREATE_DISH_MUTATION, {
+  const [createDishMutation, { loading }] = useMutation<createDish, createDishVariables>(CREATE_DISH_MUTATION, {
     onCompleted,
     refetchQueries: [
       {
