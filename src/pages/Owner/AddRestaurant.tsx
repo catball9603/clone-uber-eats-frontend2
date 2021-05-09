@@ -81,7 +81,8 @@ const AddRestaurant = () => {
       const formBody = new FormData();
       formBody.append('file', actualFile);
       const { url: coverImg } = await (
-        await fetch('https://clone-uber-eats-backend2.herokuapp.com/uploads', {
+        await fetch('http://localhost:4000/uploads/', {
+          // https://clone-uber-eats-backend2.herokuapp.com/uploads,
           method: 'POST',
           body: formBody,
         })

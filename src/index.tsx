@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import './styles/styles.css';
 import { client } from './apollo';
 import { ApolloProvider } from '@apollo/client';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 ReactDOM.render(
   <ApolloProvider client={client}>
