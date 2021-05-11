@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { gql, useMutation } from '@apollo/client';
 import uberLogo from '../images/eats-logo-1a01872c77.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { FormError } from '../components/FormError';
 import { Button } from '../components/button';
@@ -32,6 +32,7 @@ const Login = () => {
     mode: 'onChange',
   });
 
+  const history = useHistory();
   const onCompleted = (data: loginMutation) => {
     const {
       login: { ok, token },
@@ -40,6 +41,7 @@ const Login = () => {
       localStorage.setItem(LOCALSTORAGE_TOKEN, token);
       authTokenVar(token);
       isLoggedInVar(true);
+      history.push('/');
     }
   };
 

@@ -67,7 +67,7 @@ const Restaurants = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 3000,
+    speed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
@@ -167,7 +167,7 @@ const Restaurants = () => {
                 </div>
               </div>
             </div>
-            <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-1/3 text-white px-6 pt-6 lg:pt-3 text-sm flex flex-col justify-center lg:flex-row lg:justify-end">
+            <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-1/3 text-white px-6 py-2 lg:pt-3 text-sm flex flex-col justify-center lg:flex-row lg:justify-end">
               <p className="lg:mr-7">
                 This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
               </p>
