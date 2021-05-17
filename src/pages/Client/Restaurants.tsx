@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { restaurantsPageQuery, restaurantsPageQueryVariables } from '../../__generated__/restaurantsPageQuery';
+
 import Restaurant from '../../components/Restaurant';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,8 @@ import { Helmet } from 'react-helmet';
 import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments';
 import { sliderData } from '../../slide-data';
 import Slider from 'react-slick';
-import uberLogo from '../../images/eats-logo-1a01872c77 copy.svg';
+import Footer from '../../components/Footer';
+import { restaurantsPageQuery, restaurantsPageQueryVariables } from '../../__generated__/restaurantsPageQuery';
 
 const RESTAURANTS_QUERY = gql`
   query restaurantsPageQuery($input: RestaurantsInput!) {
@@ -146,34 +147,6 @@ const Restaurants = () => {
               )}
             </div>
           </div>
-          <footer className="w-full h-48 bg-gray-900">
-            <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-2/3 pt-6 px-6 flex flex-col lg:flex-row  lg:justify-between">
-              <div className="w-full lg:w-1/2">
-                <Link to="/">
-                  <img src={uberLogo} alt="Logo" className="w-36" />
-                </Link>
-              </div>
-              <div className="w-full lg:w-1/2 flex lg:justify-end lg:items-end text-white text-base py-5 lg:py-0">
-                <div>
-                  <Link to="/" className="mr-7 hover:underline">
-                    Privacy Policy
-                  </Link>
-                  <Link to="/" className="mr-7  hover:underline">
-                    Terms
-                  </Link>
-                  <Link to="/" className="hover:underline">
-                    Pricing
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-1/3 text-white px-6 py-2 lg:pt-3 text-sm flex flex-col justify-center lg:flex-row lg:justify-end">
-              <p className="lg:mr-7">
-                This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-              </p>
-              <p className="flex flex-col  lg:flex-row lg:items-start">© 2021 Uber Technologies Inc.</p>
-            </div>
-          </footer>
         </>
       )}
     </div>

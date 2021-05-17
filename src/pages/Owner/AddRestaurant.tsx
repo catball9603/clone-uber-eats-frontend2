@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/button';
 import { FormError } from '../../components/FormError';
 import { createRestaurant, createRestaurantVariables } from '../../__generated__/createRestaurant';
+
 import { MY_RESTAURANTS_QUERY } from './MyRestaurants';
 
 const CREATE_RESTAURANT_MUTATION = gql`

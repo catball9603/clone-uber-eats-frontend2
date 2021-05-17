@@ -16,6 +16,7 @@ import AddDish from '../pages/Owner/AddDish';
 import Order from '../pages/User/Order';
 import DashBoard from '../pages/Driver/DriverBoard';
 import { UserRole } from '../__generated__/globalTypes';
+import Footer from '../components/Footer';
 
 const clientRoutes = [
   {
@@ -84,33 +85,40 @@ const LoggedInRouter = () => {
 
   return (
     <Router>
-      <Header />
-      <Switch>
-        {data.me.role === UserRole.Client &&
-          clientRoutes.map((route) => (
-            <Route exact key={route.path} path={route.path}>
-              {route.component}
-            </Route>
-          ))}
-        {data.me.role === UserRole.Owner &&
-          restaurantRoutes.map((route) => (
-            <Route exact key={route.path} path={route.path}>
-              {route.component}
-            </Route>
-          ))}
-        {data.me.role === UserRole.Delivery &&
-          driverRoutes.map((route) => (
-            <Route exact key={route.path} path={route.path}>
-              {route.component}
-            </Route>
-          ))}
-        {commonRoutes.map((route) => (
-          <Route exact key={route.path} path={route.path}>
-            {route.component}
-          </Route>
-        ))}
-        <Route component={NotFound404} />
-      </Switch>
+      <div className="relative min-h-screen">
+        <Header />
+        <div className="pb-48">
+          <Switch>
+            {data.me.role === UserRole.Client &&
+              clientRoutes.map((route) => (
+                <Route exact key={route.path} path={route.path}>
+                  {route.component}
+                </Route>
+              ))}
+            {data.me.role === UserRole.Owner &&
+              restaurantRoutes.map((route) => (
+                <Route exact key={route.path} path={route.path}>
+                  {route.component}
+                </Route>
+              ))}
+            {data.me.role === UserRole.Delivery &&
+              driverRoutes.map((route) => (
+                <Route exact key={route.path} path={route.path}>
+                  {route.component}
+                </Route>
+              ))}
+            {commonRoutes.map((route) => (
+              <Route exact key={route.path} path={route.path}>
+                {route.component}
+              </Route>
+            ))}
+            <Route component={NotFound404} />
+          </Switch>
+        </div>
+        <div className="absolute bottom-0 w-full">
+          <Footer />
+        </div>
+      </div>
     </Router>
   );
 };
