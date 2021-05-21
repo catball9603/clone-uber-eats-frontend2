@@ -40,7 +40,7 @@ const CreateAccount = () => {
     if (ok) {
       //redirect
       alert('Account Created! Log in now');
-      history.push('/');
+      history.push('/log-in');
     }
   };
 
@@ -64,7 +64,7 @@ const CreateAccount = () => {
         },
       });
     }
-    history.push('/');
+    history.push('/log-in');
   };
 
   return (
@@ -80,7 +80,8 @@ const CreateAccount = () => {
             ref={register({
               required: 'Email is required',
               // eslint-disable-next-line no-useless-escape
-              pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              pattern:
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
             name="email"
             type="email"

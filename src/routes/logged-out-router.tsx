@@ -19,7 +19,7 @@ const LoggedOutRouter = () => {
             <Route component={Login} />
           </Switch>
         </div>
-        <div className="absolute bottom-0">
+        <div className="absolute bottom-0 w-full">
           <Footer />
         </div>
       </Router>

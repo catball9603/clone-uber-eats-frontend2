@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Dish from '../../components/Dish';
 import { DISH_FRAGMENT, FULL_ORDER_FRAGMENT, ORDERS_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments';
-import { myRestaurant, myRestaurantVariables } from '../../__generated__/myRestaurant';
+
 import {
   VictoryAxis,
   VictoryChart,
@@ -17,6 +17,7 @@ import {
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from 'victory';
+import { myRestaurant, myRestaurantVariables } from '../../__generated__/myRestaurant';
 import { pendingOrders } from '../../__generated__/pendingOrders';
 
 export const MY_RESTAURANT_QUERY = gql`
@@ -97,7 +98,13 @@ const MyRestaurant = () => {
           ) : (
             <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
               {data?.myRestaurant.restaurant?.menu.map((dish) => (
-                <Dish key={dish.id} name={dish.name} price={dish.price} description={dish.description} />
+                <Dish
+                  key={dish.id}
+                  name={dish.name}
+                  price={dish.price}
+                  description={dish.description}
+                  photo={dish.photo}
+                />
               ))}
             </div>
           )}

@@ -4,7 +4,9 @@ import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button } from '../../components/button';
+import { FormError } from '../../components/FormError';
 import { createDish, createDishVariables } from '../../__generated__/createDish';
+
 import { MY_RESTAURANT_QUERY } from './MyRestaurant';
 
 const CREATE_DISH_MUTATION = gql`
@@ -24,14 +26,25 @@ interface IFormProps {
   name: string;
   price: string;
   description: string;
+  file: string;
   [key: string]: string;
 }
 
 const AddDish = () => {
   const history = useHistory();
+
   const { restaurantId } = useParams<IParams>();
-  const onCompleted = () => {};
-  const [createDishMutation, { loading }] = useMutation<createDish, createDishVariables>(CREATE_DISH_MUTATION, {
+
+  const onCompleted = (data: createDish) => {
+    // const {
+    //   createDish: { ok, error },
+    // } = data;
+    // if (ok) {
+    //   setUploading(false);
+    // }
+  };
+
+  const [createDishMutation, { data }] = useMutation<createDish, createDishVariables>(CREATE_DISH_MUTATION, {
     onCompleted,
     refetchQueries: [
       {
@@ -47,26 +60,44 @@ const AddDish = () => {
   const { register, getValues, handleSubmit, formState, setValue } = useForm<IFormProps>({
     mode: 'onChange',
   });
+  const [uploading, setUploading] = useState(false);
+  const onSubmit = async () => {
+    try {
+      setUploading(true);
+      const { name, price, description, file, ...rest } = getValues();
+      const actualFile = file[0];
+      const formBody = new FormData();
+      formBody.append('file', actualFile);
+      const { url: photo } = await (
+        await fetch('http://localhost:4000/uploads/', {
+          // https://clone-uber-eats-backend2.herokuapp.com/uploads,
+          method: 'POST',
+          body: formBody,
+        })
+      ).json();
 
-  const onSubmit = () => {
-    const { name, price, description, ...rest } = getValues();
-    const optionsObeject = optionsNumber.map((theId) => ({
-      name: rest[`${theId}-optionName`],
-      extra: +rest[`${theId}-optionExtra`],
-    }));
+      const optionsObeject = optionsNumber.map((theId) => ({
+        name: rest[`${theId}-optionName`],
+        extra: +rest[`${theId}-optionExtra`],
+      }));
 
-    createDishMutation({
-      variables: {
-        input: {
-          name,
-          description,
-          price: +price,
-          restaurantId: +restaurantId,
-          options: optionsObeject,
+      createDishMutation({
+        variables: {
+          input: {
+            name,
+            description,
+            photo,
+            price: +price,
+            restaurantId: +restaurantId,
+            options: optionsObeject,
+          },
         },
-      },
-    });
-    history.goBack();
+      });
+      history.goBack();
+      setUploading(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const [optionsNumber, setOptionsNumber] = useState<number[]>([]);
@@ -108,6 +139,9 @@ const AddDish = () => {
           name="description"
           placeholder="Description"
         />
+        <div>
+          <input type="file" accept="image/*" name="file" ref={register({ required: true })} />
+        </div>
         <div className="my-10">
           <h4 className="text-lg font-medium mb-3">Dish Options</h4>
           <span className="bg-gray-900 p-2 mt-5 cursor-pointer text-white" onClick={onAddOptionClick}>
@@ -141,7 +175,8 @@ const AddDish = () => {
             ))}
         </div>
 
-        <Button loading={loading} canClick={formState.isValid} actionText="Create Dish" />
+        <Button loading={uploading} canClick={formState.isValid} actionText="Create Dish" />
+        {data?.createDish?.error && <FormError errorMessage={data.createDish.error} />}
       </form>
     </div>
   );

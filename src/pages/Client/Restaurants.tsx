@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments';
 import { sliderData } from '../../slide-data';
 import Slider from 'react-slick';
-import Footer from '../../components/Footer';
+
 import { restaurantsPageQuery, restaurantsPageQueryVariables } from '../../__generated__/restaurantsPageQuery';
 
 const RESTAURANTS_QUERY = gql`
@@ -68,11 +68,12 @@ const Restaurants = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
     autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 5000,
   };
 
   return (
@@ -80,12 +81,11 @@ const Restaurants = () => {
       <Helmet>
         <title>Home | Uber-eats</title>
       </Helmet>
-      <div className="relative w-full h-96 sbg-lime-600">
-        <Slider className="w-full h-full overflow-hidden absolute object-cover bg-center" {...settings}>
+      <div className="relative max-w-full h-96 bg-gray-800 ">
+        <Slider className="w-full h-full overflow-hidden absolute bg-center object-cover  bg-no-repeat " {...settings}>
           {sliderData.map((slide, index) => (
             <img key={index} src={slide.img} alt={slide.alt} />
           ))}
-          {console.log(sliderData.length)}
         </Slider>
         <form
           onSubmit={handleSubmit(onSearchSubmit)}

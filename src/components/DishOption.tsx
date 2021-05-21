@@ -27,7 +27,7 @@ const DishOption: React.FC<IDishOptionProps> = ({
   return (
     <span onClick={onClick} className={`border px-2 py-1 ${isSelected ? 'border-gray-800' : 'hover:border-gray-800'}`}>
       <span className="mr-2">{name}</span>
-      {<span className="text-sm text-gray-600">(${extra})</span>}
+      {<span className="text-sm text-gray-600">({extra})</span>}
     </span>
   );
 };

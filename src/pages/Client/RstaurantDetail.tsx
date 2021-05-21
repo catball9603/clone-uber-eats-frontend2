@@ -7,6 +7,7 @@ import Dish from '../../components/Dish';
 import DishOption from '../../components/DishOption';
 import { DISH_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments';
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
+
 import { CreateOrderItemInput } from '../../__generated__/globalTypes';
 import { restaurant, restaurantVariables } from '../../__generated__/restaurant';
 
@@ -164,24 +165,27 @@ const RestaurantDetail = () => {
   return (
     <div>
       {!loading && (
+        // header
         <div>
           <div
-            className="bg-gray-800 py-44 bg-cover bg-center "
+            className="w-full h-96 bg-cover object-cover bg-center flex items-end"
             style={{ backgroundImage: `url(${data?.restaurant.restaurant?.coverImg})` }}
           >
-            <div className="max-w-lg bg-white py-9 pl-8 lg:pl-48">
-              <div className="container">
-                <p className="text-4xl font-semibold mb-2">{data?.restaurant.restaurant?.name}</p>
+            <div className="w-full h-4/6 bg-gradient-to-t from-black text-lg text-white flex items-end">
+              <div className="container pb-5 px-6">
+                <p className="text-4xl md:text-5xl  font-semibold mb-1">{data?.restaurant.restaurant?.name}</p>
                 <Link to={`/category/${data?.restaurant.restaurant?.category?.slug}`}>
-                  <p className="text-sm font-light">{data?.restaurant.restaurant?.category?.name}</p>
+                  <p className="text-base md:text-lg">{data?.restaurant.restaurant?.category?.name}</p>
                 </Link>
-                <div className="flex flex-row items-center mt-2">
+                <div className="flex mt-5">
                   <FontAwesomeIcon icon={faCompass} />
                   <p className="ml-2 text-sm font-light">{data?.restaurant.restaurant?.address}</p>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* orderStarted 부분  */}
           <div className="container px-8 mb-32 2xl:px-0 mt-20 flex flex-col items-end">
             {!orderStarted && (
               <button onClick={triggerStartOrder} className="btn px-8">
@@ -199,7 +203,7 @@ const RestaurantDetail = () => {
               </div>
             )}
 
-            <div className="w-full grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+            <div className="w-full grid mt-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
               {data?.restaurant.restaurant?.menu.map((dish) => (
                 <Dish
                   isSelected={isSelected(dish.id)}
@@ -208,6 +212,7 @@ const RestaurantDetail = () => {
                   key={dish.id}
                   name={dish.name}
                   price={dish.price}
+                  photo={dish.photo}
                   description={dish.description}
                   isCustomer={true}
                   options={dish.options}
