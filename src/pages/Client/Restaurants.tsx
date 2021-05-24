@@ -102,7 +102,7 @@ const Restaurants = () => {
       </div>
       {!loading && (
         <>
-          <div className="max-w-screen-2xl mx-auto mt-8 pb-10">
+          <div className="max-w-screen-2xl mx-auto pt-8 pb-28">
             <div className="flex justify-around max-w-sm mx-auto cursor-pointer ">
               {data?.allCategories.categories?.map((category) => (
                 <Link key={category.id} to={`/category/${category.slug}`}>
@@ -127,7 +127,7 @@ const Restaurants = () => {
                 />
               ))}
             </div>
-            <div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-7">
+            <div className="grid grid-cols-3 text-center max-w-md items-center mx-auto">
               {page > 1 ? (
                 <button onClick={onPrevPageClick} className="focus:outline-none text-2xl font-bold">
                   <FontAwesomeIcon icon={faArrowLeft} />

@@ -79,11 +79,13 @@ const MyRestaurant = () => {
         <title>My Restaurant | Uber Eats</title>
       </Helmet>
       <div
-        className="bg-gray-800 py-44 bg-center bg-cover mb-10"
+        className="bg-gray-800 py-44 bg-center bg-cover"
         style={{ backgroundImage: `url(${data?.myRestaurant.restaurant?.coverImg})` }}
       ></div>
-      <div className="container px-8 2xl:px-0">
-        <h2 className="text-3xl font-bold mb-10">{data?.myRestaurant.restaurant?.name || 'Loading ...'}</h2>
+      <div className="container px-8 2xl:px-0 pt-20">
+        <h2 className="text-4xl 2xl:text-5xl font-bold mb-10">
+          {data?.myRestaurant.restaurant?.name || 'Loading ...'}
+        </h2>
         <div className="flex flex-col md:flex-row">
           <Link to={`/restaurants/${id}/add-dish`} className="md:mr-8 text-white bg-gray-800 py-3 px-10 mb-3 md:mb-0 ">
             Add Dish <FontAwesomeIcon className="ml-4" icon={faArrowRight} />
@@ -96,7 +98,7 @@ const MyRestaurant = () => {
           {data?.myRestaurant.restaurant?.menu.length === 0 ? (
             <h4 className="text-xl mb-5">Please upload a dish!</h4>
           ) : (
-            <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+            <div className="grid mt-16 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-10">
               {data?.myRestaurant.restaurant?.menu.map((dish) => (
                 <Dish
                   key={dish.id}
@@ -111,7 +113,7 @@ const MyRestaurant = () => {
         </div>
         <div className="mt-20 mb-10">
           <h4 className="text-2xl font-bold text-center">Sales</h4>
-          <div className="mt-10 mb-10">
+          <div className="py-20">
             <VictoryChart
               theme={VictoryTheme.material}
               domainPadding={50}

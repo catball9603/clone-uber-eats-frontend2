@@ -186,7 +186,7 @@ const RestaurantDetail = () => {
           </div>
 
           {/* orderStarted 부분  */}
-          <div className="container px-8 mb-32 2xl:px-0 mt-20 flex flex-col items-end">
+          <div className="container px-8 2xl:px-0 py-20 flex flex-col items-end">
             {!orderStarted && (
               <button onClick={triggerStartOrder} className="btn px-8">
                 Start Order
@@ -203,7 +203,7 @@ const RestaurantDetail = () => {
               </div>
             )}
 
-            <div className="w-full grid mt-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
+            <div className="w-full grid pt-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 mb-20">
               {data?.restaurant.restaurant?.menu.map((dish) => (
                 <Dish
                   isSelected={isSelected(dish.id)}

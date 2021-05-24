@@ -4,8 +4,8 @@ import uberLogo from '../images/eats-logo-1a01872c77 copy.svg';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full h-48 bg-gray-900 bottom-0">
-      <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-2/3 pt-6 px-6 flex flex-col lg:flex-row  lg:justify-between">
+    <footer className="w-full h-60 bg-gray-900 bottom-0">
+      <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-3/4 pt-7 px-6 flex flex-col lg:flex-row  lg:justify-between">
         <div className="w-full lg:w-1/2">
           <Link to="/">
             <img src={uberLogo} alt="Logo" className="w-36" />
@@ -25,11 +25,11 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-1/3 text-white px-6 py-2 lg:pt-3 text-sm flex flex-col justify-center lg:flex-row lg:justify-end">
+      <div className="max-w-screen-2xl mx-auto h-1/2 lg:h-1/4 text-white px-6 py-2 lg:pt-3 text-sm flex flex-col justify-center lg:flex-row lg:justify-end">
         <p className="lg:mr-7">
           This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
         </p>
-        <p className="flex flex-col  lg:flex-row lg:items-start">© 2021 Uber Technologies Inc.</p>
+        <p className="flex flex-col lg:flex-row lg:items-start">© 2021 Uber Technologies Inc.</p>
       </div>
     </footer>
   );

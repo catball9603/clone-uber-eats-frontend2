@@ -88,6 +88,7 @@ const AddRestaurant = () => {
           body: formBody,
         })
       ).json();
+
       createRestaurantMutation({
         variables: {
           input: {

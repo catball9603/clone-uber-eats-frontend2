@@ -22,15 +22,15 @@ export const MY_RESTAURANTS_QUERY = gql`
 `;
 
 const MyRestaurants = () => {
-  const { data } = useQuery<myRestaurants>(MY_RESTAURANTS_QUERY);
+  const { data, loading } = useQuery<myRestaurants>(MY_RESTAURANTS_QUERY);
 
   return (
     <div>
       <Helmet>
         <title>My Restaurants | Uber Eats </title>
       </Helmet>
-      <div>
-        <div className="container mt-32 px-8 2xl:px-0">
+      {!loading && (
+        <div className="container py-28 px-8 2xl:px-0">
           <h1 className="text-4xl font-bold mb-3">My Restaurants</h1>
           {data?.myRestaurants.ok && data.myRestaurants.restaurants.length === 0 ? (
             <>
@@ -66,7 +66,8 @@ const MyRestaurants = () => {
             </div>
           )}
         </div>
-      </div>
+      )}
+      <div></div>
     </div>
   );
 };
