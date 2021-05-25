@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       <div className="py-6 px-8">
         <div className="w-full max-w-screen-2xl mx-auto flex justify-between items-center ">
           <Link to="/">
-            <img src={uberLogo} alt="Logo" className="w-44" />
+            <img src={uberLogo} alt="Logo" className="w-32 md:w-40 xl:-44" />
           </Link>
 
           <span className="text-lg">
