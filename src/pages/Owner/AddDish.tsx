@@ -69,8 +69,7 @@ const AddDish = () => {
       const formBody = new FormData();
       formBody.append('file', actualFile);
       const { url: photo } = await (
-        await fetch('http://localhost:4000/uploads/', {
-          // https://clone-uber-eats-backend2.herokuapp.com/uploads,
+        await fetch('https://clone-uber-eats-backend2.herokuapp.com/uploads', {
           method: 'POST',
           body: formBody,
         })
@@ -111,12 +110,12 @@ const AddDish = () => {
     setValue(`${idToDelete}-optionExtra`, '');
   };
   return (
-    <div className="container flex flex-col items-center mt-32 px-8 2xl:px-0">
+    <div className="container flex flex-col items-center px-8 2xl:px-0 mt-28 mb-40">
       <Helmet>
         <title>Add Dish | Uber Eats</title>
       </Helmet>
       <h4 className="text-2xl font-semibold mb-3">Add Dish</h4>
-      <form className=" w-full max-w-screen-sm grid gap-3 my-5" onSubmit={handleSubmit(onSubmit)}>
+      <form className=" w-full max-w-screen-sm grid gap-3 py-5" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
           className="input"
@@ -142,9 +141,9 @@ const AddDish = () => {
         <div>
           <input type="file" accept="image/*" name="file" ref={register({ required: true })} />
         </div>
-        <div className="my-10">
+        <div className="my-5">
           <h4 className="text-lg font-medium mb-3">Dish Options</h4>
-          <span className="bg-gray-900 p-2 mt-5 cursor-pointer text-white" onClick={onAddOptionClick}>
+          <span className="bg-gray-900 p-2 cursor-pointer text-white border-2" onClick={onAddOptionClick}>
             Add Dish Option
           </span>
           {optionsNumber.length !== 0 &&

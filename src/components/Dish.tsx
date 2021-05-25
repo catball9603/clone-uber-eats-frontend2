@@ -46,7 +46,7 @@ const Dish: React.FC<IDishProps> = ({
         isSelected ? 'border-gray-800 cursor-default' : ' cursor-pointer hover:border-gray-800 '
       }`}
     >
-      <div className="flex-row w-2/5 ">
+      <div className="flex-row w-1/2 pr-3">
         <div className="w-full mb-3">
           <div className="text-lg font-medium">
             <div className="w-1/2 mb-5">
@@ -63,7 +63,7 @@ const Dish: React.FC<IDishProps> = ({
               )}
             </div>
           </div>
-          <p className="text-3xl font-bold mb-3">{name}</p>
+          <p className="text-2xl font-bold mb-3">{name}</p>
           <p className="text-xl font-bold mb-1">price: {price}</p>
           <p className="text-base">{description}</p>
         </div>
@@ -79,7 +79,7 @@ const Dish: React.FC<IDishProps> = ({
           backgroundImage: `url(${photo})`,
           borderRadius: 10,
         }}
-        className="w-3/5 h-44 bg-cover object-cover bg-center "
+        className="w-1/2 h-44 bg-cover object-cover bg-center "
       ></div>
     </div>
   );
