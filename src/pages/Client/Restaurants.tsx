@@ -81,7 +81,7 @@ const Restaurants = () => {
       <Helmet>
         <title>Home | Uber-eats</title>
       </Helmet>
-      <div className="relative max-w-full h-96 bg-gray-800 ">
+      <div className="relative max-w-full h-60 md:h-80 2xl:h-96 bg-gray-800 ">
         <Slider className="w-full h-full overflow-hidden absolute bg-center object-cover  bg-no-repeat " {...settings}>
           {sliderData.map((slide, index) => (
             <img key={index} src={slide.img} alt={slide.alt} />
